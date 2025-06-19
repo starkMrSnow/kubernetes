@@ -1,4 +1,4 @@
-aoiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kyc-front-end
@@ -7,16 +7,16 @@ spec:
   selector:
     matchLabels:
       app: kyc-front-end
-    template:
-      metadata:
-        labels:
-          app: kyc-front-end
-      spec:
-        containers:
-          - name: kyc-front-end
-            image: cecillwala/kyc-frontend
-            ports:
-              - containerPort: 80
+  template:
+    metadata:
+      labels:
+        app: kyc-front-end
+    spec:
+      containers:
+        - name: kyc-front-end
+          image: cecillwala/kyc-frontend
+          ports:
+            - containerPort: 80
 
 ---
 
