@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: cecillwala/api-gateway:latest
+          image: cecillwala/kyc-api-gateway
           ports:
             - containerPort: 8080
 
