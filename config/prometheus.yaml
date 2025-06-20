@@ -11,14 +11,16 @@ prometheus:
       limits:
         memory: 256Mi
         cpu: 300m
+    # Add persistent storage configuration
     storageSpec:
       volumeClaimTemplate:
         spec:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 8Gi
-          storageClassName: manual  # or your desired StorageClass
+              storage: 10Gi
+          # Uncomment and specify storageClass if needed
+          # storageClassName: "your-storage-class"
   service:
     type: NodePort
     nodePort: 32001
@@ -32,14 +34,15 @@ alertmanager:
       limits:
         memory: 128Mi
         cpu: 100m
+    # Add persistent storage for alertmanager
     storage:
       volumeClaimTemplate:
         spec:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 4Gi
-          storageClassName: manual
+              storage: 2Gi
+          # storageClassName: "your-storage-class"
   service:
     type: NodePort
     nodePort: 32002
@@ -57,6 +60,13 @@ grafana:
   service:
     type: NodePort
     nodePort: 32000
+  # Add persistent storage for Grafana
+  persistence:
+    enabled: true
+    size: 5Gi
+    accessModes:
+      - ReadWriteOnce
+    # storageClassName: "your-storage-class"
   grafana.ini:
     server:
       serve_from_sub_path: true
