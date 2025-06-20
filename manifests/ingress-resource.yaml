@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: mevin.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway
+                port:
+                  number: 8080
+
+          - path: /eureka
+            pathType: Prefix
+            backend:
+              service:
+                name: eureka-server
+                port:
+                  number: 9099
+
+          - path: /kyc
+            pathType: Prefix
+            backend:
+              service:
+                name: kyc-frontend-service 
+                port:
+                  number: 80
+
+
