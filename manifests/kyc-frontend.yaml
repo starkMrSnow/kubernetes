@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kyc-front-end
-          image: cecillwala/kyc-frontend
+          image: stanleyotieno/kyc-service-frontend
           ports:
             - containerPort: 80
 

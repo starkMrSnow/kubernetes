@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: report-frontend
-          image: cecillwala/kyc-report-frontend
+          image: stanleyotieno/kyc-report-front-end
           ports:
             - containerPort: 80
             
