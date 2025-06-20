@@ -11,6 +11,14 @@ prometheus:
       limits:
         memory: 256Mi
         cpu: 300m
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 8Gi
+          storageClassName: manual  # or your desired StorageClass
   service:
     type: NodePort
     nodePort: 32001
@@ -24,6 +32,14 @@ alertmanager:
       limits:
         memory: 128Mi
         cpu: 100m
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 4Gi
+          storageClassName: manual
   service:
     type: NodePort
     nodePort: 32002
