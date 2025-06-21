@@ -40,3 +40,12 @@ spec:
                 name: kyc-report-frontend
                 port:
                   number: 80
+
+          - path: /kyc-service-backend
+            pathType: Prefix
+            backend: 
+              service:
+                name: kyc-service-backend
+                port:
+                  number: 80
+
