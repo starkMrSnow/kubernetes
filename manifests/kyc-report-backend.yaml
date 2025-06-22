@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-service
+  labels:
+    app:  kyc-report-service
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  kyc-report-service
+  template:
+    metadata:
+      labels:
+        app:  kyc-report-service
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - >
+              until nc -z postgres 5432;
+              do
+                echo "Waiting for PostgreSQL...";
+                sleep 2;
+              done
+      containers:
+        - name: kyc-report-service
+          image: stanleyotieno/kyc-backend-report
+          ports:
+            - containerPort: 8083
+          env:
+            - name: DB_HOST
+              value: "postgres.default.svc.cluster.local"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "ps_db"
+            - name: DB_USER
+              value: "ps_user"
+            - name: DB_PASSWORD
+              value: "SecurePassword"
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+
+---
+            
+apiVersion: v1
+kind: Service
+metadata:
+  name: report-service
+spec:
+  type: ClusterIP
+  selector:
+    app: kyc-report-service
+  ports:
+    - port: 8083
+      targetPort: 8083
