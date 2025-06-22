@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: stanleyotieno/api-gateway
+          image: stanleyotieno/kyc-api-gateway
           ports:
             - containerPort: 8080
 

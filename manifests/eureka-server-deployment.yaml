@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: eureka-server
-          image: stanleyotieno/eureka-server
+          image: stanleyotieno/kyc-eureka-server
           ports:
             - containerPort: 9099
 
