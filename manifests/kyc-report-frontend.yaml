@@ -27,7 +27,6 @@ kind: Service
 metadata:
   name: report-frontend
 spec:
-  type: NodePort
   selector:
     app: kyc-report-frontend
   ports:
