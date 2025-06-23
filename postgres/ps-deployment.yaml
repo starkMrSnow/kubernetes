@@ -28,9 +28,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresdata
-          securityContext:
-            runAsUser: 999
-            runAsUser: 999
       volumes:
         - name: postgresdata
           persistentVolumeClaim:
