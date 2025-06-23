@@ -6,5 +6,5 @@ metadata:
     app: postgres
 data:
   POSTGRES_DB: ps_db
-  POSTGRES_USER: ps_user
-  POSTGRES_PASSWORD: SecurePassword
+  POSTGRES_USER:  cHNfdXNlcg==   
+  POSTGRES_PASSWORD: U2VjdXJlUGFzc3dvcmQ= 
