@@ -13,7 +13,7 @@ prometheus:
         cpu: 300m
   service:
     type: NodePort
-    nodePort: 32001
+    nodePort: 32005
 
 alertmanager:
   alertmanagerSpec:
@@ -26,7 +26,7 @@ alertmanager:
         cpu: 100m
   service:
     type: NodePort
-    nodePort: 32002
+    nodePort: 32006
 
 grafana:
   enabled: true
@@ -40,7 +40,7 @@ grafana:
   adminPassword: "admin"
   service:
     type: NodePort
-    nodePort: 32000
+    nodePort: 32007
   grafana.ini:
     server:
       serve_from_sub_path: true
