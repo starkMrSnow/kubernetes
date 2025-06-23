@@ -72,12 +72,12 @@ spec:
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  nmae: postgres-secret
+                  name: postgres-secret
                   key:  POSTGRES_USER
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  nmae: postgres-secret
+                  name: postgres-secret
                   key:  POSTGRES_PASSWORD
           volumeMounts:
             - name: report-storage
