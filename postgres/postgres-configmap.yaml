@@ -4,7 +4,7 @@ metadata:
   name: postgres-secret
   labels:
     app: postgres
-data:
+stringData:
   POSTGRES_DB: ps_db
   POSTGRES_USER: ps_user
   POSTGRES_PASSWORD: SecurePassword
