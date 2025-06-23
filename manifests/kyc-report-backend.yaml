@@ -28,7 +28,7 @@ spec:
               done
       containers:
         - name: kyc-report-service
-          image: stanleyotieno/kyc-backend-report
+          image:  cecillwala/kyc-report-service
           ports:
             - containerPort: 8083
 
