@@ -34,4 +34,4 @@ spec:
     nodePort: 32070
     port: 80
     targetPort: 80
-  type: ClusterIP
+  type: NodePort
