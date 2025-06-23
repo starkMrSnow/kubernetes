@@ -1,33 +1,3 @@
-# --- PVC for persistent storage ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: kyc-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: manual
-  volumeName: kyc-pv
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: kyc-pv
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: manual
-  hostPath:
-    path: "/mnt/data/kyc"
-  claimRef:
-    name: kyc-pvc
-    namespace: default
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,40 +19,7 @@ spec:
           image: stanleyotieno/kyc-service-backend
           ports:
             - containerPort: 8081
-          env:
-            - name: DB_HOST
-              value: postgres
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_DB
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_USER
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
-          volumeMounts:
-            - name: kyc-storage
-              mountPath: /app/data  
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "100m"
-            limits:
-              memory: "512Mi"
-              cpu: "250m"
-      volumes:
-        - name: kyc-storage
-          persistentVolumeClaim:
-            claimName: kyc-pvc
+       
 ---
 
 apiVersion: v1

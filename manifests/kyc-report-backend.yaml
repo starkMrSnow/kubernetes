@@ -1,36 +1,3 @@
-# Persistent Volume Claim for Report Backend Service
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: report-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 512Mi
-  storageClassName: manual
-  volumeName: report-pv
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: report-pv
-spec:
-  capacity:
-    storage: 512Mi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: manual
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "/mnt/data/report"
-  claimRef:
-    namespace: default
-    name: report-pvc
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,36 +31,6 @@ spec:
           image: stanleyotieno/kyc-backend-report
           ports:
             - containerPort: 8083
-          env:
-            - name: DB_HOST
-              value: "postgres"
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key:  POSTGRES_USER
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key:  POSTGRES_PASSWORD
-          volumeMounts:
-            - name: report-storage
-              mountPath: /app/data
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "150m"
-            limits:
-              memory: "512Mi"
-              cpu: "300m"
-      volumes:
-        - name: report-storage
-          persistentVolumeClaim:
-            claimName: report-pvc
-
 
 
 ---
