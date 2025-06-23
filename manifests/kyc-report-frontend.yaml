@@ -19,21 +19,7 @@ spec:
           image: stanleyotieno/kyc-report-service
           ports:
             - containerPort: 80
-          env:
-            # Add backend API URL environment variable
-            - name: API_BASE_URL
-              value: "http://report-service.default.svc.cluster.local:8083"
-            # Or if your frontend expects a different env var name, adjust accordingly
-            - name: REACT_APP_API_URL
-              value: "http://report-service.default.svc.cluster.local:8083"
-          resources:
-            requests:
-              memory: 128Mi
-              cpu: 100m
-            limits:
-              memory: 256Mi
-              cpu: 200m
-            
+
 ---
 
 apiVersion: v1
@@ -49,3 +35,4 @@ spec:
     nodePort: 32070
     port: 80
     targetPort: 80
+  type: ClusterIP

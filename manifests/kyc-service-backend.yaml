@@ -1,3 +1,33 @@
+# --- PVC for persistent storage ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kyc-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: manual
+  volumeName: kyc-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kyc-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  hostPath:
+    path: "/mnt/data/kyc"
+  claimRef:
+    name: kyc-pvc
+    namespace: default
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
