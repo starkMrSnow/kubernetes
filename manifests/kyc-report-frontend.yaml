@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: report-frontend
-          image: stanleyotieno/kyc-report-service
+          image: stanleyotieno/kyc-report-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 
