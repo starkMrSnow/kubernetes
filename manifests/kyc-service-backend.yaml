@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kyc-service
-          image: stanleyotieno/kyc-service-backend
+          image: cecillwala/kyc-kyc-service
           ports:
             - containerPort: 8081
        
