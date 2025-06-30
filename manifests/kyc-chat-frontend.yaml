@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kyc-chat-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kyc-chat-frontend
+  template:
+    metadata:
+      labels:
+        app: kyc-chat-frontend
+    spec:
+      containers:
+        - name: kyc-front-end
+          image: stanleyotieno/kyc-chat-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: kyc-chat-frontend
+spec:
+  selector: 
+    app: kyc-chat-frontend
+  ports:
+    - protocol:   TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
