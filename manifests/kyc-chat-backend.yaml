@@ -16,7 +16,7 @@ spec:
         - name: kyc-chat-backend
           image: stanleyotieno/kyc-chat-backend:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8010
 
 ---
 apiVersion: v1
@@ -27,6 +27,6 @@ spec:
   selector:
     app: kyc-chat-backend
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8010
+      targetPort: 8010
   type: ClusterIP
