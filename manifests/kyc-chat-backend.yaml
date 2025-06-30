@@ -29,5 +29,5 @@ spec:
   ports:
     - port: 8010
       targetPort: 8010
-      NodePort: 32474
+      nodePort: 32474
   type: NodePort
