@@ -49,7 +49,7 @@ grafana:
       enabled: true
       host: smtp.zoho.com:587
       user: stanley.otieno@giktek.io
-      password: "dJ0T0cD2j4x1"
+      password: ${SMTP_PASSWORD}
       from_name: Grafana Alerts
       from_address: stanley.otieno@giktek.io
       skip_verify: true
