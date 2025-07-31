@@ -54,11 +54,11 @@ grafana:
       from_address: stanley.otieno@giktek.io
       skip_verify: true
     
-  notifiers:
-  - name: email-contact-point
-    type: email
-    settings:
-      addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
+  # notifiers:
+  # - name: email-contact-point
+  #   type: email
+  #   settings:
+  #     addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
 
   datasources:
     datasources.yaml:
