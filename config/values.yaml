@@ -45,6 +45,21 @@ grafana:
     server:
       root_url: https://mevin.online/grafana
       serve_from_sub_path: true
+    smtp:
+      enabled: true
+      host: smtp.zoho.com:587
+      user: stanley.otieno@giktek.io
+      password: "dJ0T0cD2j4x1"
+      from_name: Grafana Alerts
+      from_address: stanley.otieno@giktek.io
+      skip_verify: true
+    
+  notifiers:
+  - name: email-contact-point
+    type: email
+    settings:
+      addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
+
   datasources:
     datasources.yaml:
       apiVersion: 1
