@@ -45,17 +45,6 @@ grafana:
     server:
       root_url: https://mevin.online/grafana
       serve_from_sub_path: true
-    smtp:
-      enabled: true
-      host: smtp.gmail.com:587
-      user: 175dollarsnow@gmail.com
-      password: ""
-      from_name: Grafana Alerts
-      from_address: 175dollarsnow@gmail.com
-      skip_verify: false
-      starttls_policy: "Always"
-  envFromSecret:
-  - grafana-smtp-secret
   datasources:
     datasources.yaml:
       apiVersion: 1
