@@ -30,6 +30,31 @@ alertmanager:
 
 grafana:
   enabled: true
+  adminPassword: "admin"
+  service:
+    type: NodePort
+    nodePort: 32007
+
+  grafana.ini:
+    server:
+      root_url: https://mevin.online/grafana
+      serve_from_sub_path: true
+    smtp:
+      enabled: true
+      host: smtp.gmail.com:587
+      user: 175dollarsnow@gmail.com
+      password: $__file{/etc/secrets/smtp_password}
+      from_name: Grafana Alerts
+      from_address: 175dollarsnow@gmail.com
+      starttls_policy: "Always"
+      skip_verify: false
+
+  extraSecretMounts:
+    - name: smtp-secret
+      secretName: grafana-smtp-secret
+      mountPath: /etc/secrets
+      readOnly: true
+
   resources:
     requests:
       memory: 128Mi
@@ -37,14 +62,7 @@ grafana:
     limits:
       memory: 256Mi
       cpu: 150m
-  adminPassword: "admin"
-  service:
-    type: NodePort
-    nodePort: 32007
-  grafana.ini:
-    server:
-      root_url: https://mevin.online/grafana
-      serve_from_sub_path: true
+
   datasources:
     datasources.yaml:
       apiVersion: 1
