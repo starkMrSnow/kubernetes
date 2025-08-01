@@ -61,11 +61,11 @@ grafana:
   # The 'envFromSecrets' block tells Grafana to make the secret's keys available as environment variables.
   
   # --- ALSO, UNCOMMENT THE NOTIFIERS SECTION AND UPDATE IT ---
-  notifiers:
-  - name: email-contact-point
-    type: email
-    settings:
-      addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
+  # notifiers:
+  # - name: email-contact-point
+  #   type: email
+  #   settings:
+  #     addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
 
   datasources:
     datasources.yaml:
