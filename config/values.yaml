@@ -47,12 +47,13 @@ grafana:
       serve_from_sub_path: true
     smtp:
       enabled: true
-      host: smtp.zoho.com:587
-      user: stanley.otieno@giktek.io
+      host: smtp.gmail.com:587
+      user: 175dollarsnow@gmail.com
       password: ${SMTP_PASSWORD}
       from_name: Grafana Alerts
-      from_address: stanley.otieno@giktek.io
-      skip_verify: true
+      from_address: 175dollarsnow@gmail.com
+      skip_verify: false
+      starttls_policy: "Always"
     
   # notifiers:
   # - name: email-contact-point
