@@ -49,17 +49,23 @@ grafana:
       enabled: true
       host: smtp.gmail.com:587
       user: 175dollarsnow@gmail.com
-      password: ${SMTP_PASSWORD}
+      password: ""  # This line should now be an empty string
       from_name: Grafana Alerts
       from_address: 175dollarsnow@gmail.com
       skip_verify: false
       starttls_policy: "Always"
     
-  # notifiers:
-  # - name: email-contact-point
-  #   type: email
-  #   settings:
-  #     addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
+  # --- ADD THIS SECTION ---
+  envFromSecrets:
+  - name: grafana-smtp-secret
+  # The 'envFromSecrets' block tells Grafana to make the secret's keys available as environment variables.
+  
+  # --- ALSO, UNCOMMENT THE NOTIFIERS SECTION AND UPDATE IT ---
+  notifiers:
+  - name: email-contact-point
+    type: email
+    settings:
+      addresses: "stanley.otieno@giktek.io,175dollarsnow@gmail.com"
 
   datasources:
     datasources.yaml:
