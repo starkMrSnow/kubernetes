@@ -39,6 +39,10 @@ grafana:
     server:
       root_url: https://mevin.online/grafana
       serve_from_sub_path: true
+    rendering:
+      server_url: http://localhost:8090
+      callback_url: https://mevin.online/grafana
+      serve_from_sub_path: true
     smtp:
       enabled: true
       host: smtp.gmail.com:587
@@ -48,6 +52,16 @@ grafana:
       from_address: 175dollarsnow@gmail.com
       starttls_policy: "Always"
       skip_verify: false
+  imageRenderer:
+    enabled: true
+    image:
+      repository: grafana/grafana-image-renderer
+      tag: latest
+      pullPolicy: IfNotPresent
+    service:
+      enabled: true
+      type: ClusterIP 
+      port: 8090
 
   extraSecretMounts:
     - name: smtp-secret
