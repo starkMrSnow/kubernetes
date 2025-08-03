@@ -39,6 +39,9 @@ grafana:
     server:
       root_url: https://mevin.online/grafana
       serve_from_sub_path: true
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
     rendering:
       server_url: http://localhost:8090
       callback_url: https://mevin.online/grafana
