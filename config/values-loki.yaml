@@ -1,4 +1,10 @@
 loki:
+  persistence:
+    enabled: true
+    storageClassName: "local-path"
+    accessModes:
+      - ReadWriteOnce
+    size: 50Gi
   enabled: true
   service:
     type: NodePort
@@ -50,15 +56,15 @@ loki:
 
     table_manager:
       retention_deletes_enabled: true
-      retention_period: 48h
+      retention_period: 168h
 
   resources:
     requests:
-      memory: 128Mi
-      cpu: 50m
+      memory: 512Mi
+      cpu: 200m
     limits:
-      memory: 256Mi
-      cpu: 100m
+      memory: 16Gi
+      cpu: 500m
 
 promtail:
   enabled: true
