@@ -90,6 +90,11 @@ grafana:
           access: proxy
           url: http://loki.monitoring.svc.cluster.local:3100
           isDefault: false
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+          isDefault: false
 
 kubeStateMetrics:
   resources:
