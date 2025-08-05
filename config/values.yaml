@@ -33,7 +33,7 @@ grafana:
   adminPassword: "admin"
   service:
     type: NodePort
-    nodePort: 32009
+    nodePort: 32007
 
   grafana.ini:
     server:
@@ -120,9 +120,9 @@ prometheusOperator:
 
 loki:
   enabled: true
-
-  config:
-    auth_enabled: false
+  service:
+    type: NodePort
+    nodePort: 32009
 
   yaml:
     auth_enabled: false
@@ -179,10 +179,6 @@ loki:
     limits:
       memory: 256Mi
       cpu: 100m
-
-  service:
-    type: NodePort
-    nodePort: 32003
 
 promtail:
   enabled: true
