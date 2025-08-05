@@ -33,7 +33,7 @@ grafana:
   adminPassword: "admin"
   service:
     type: NodePort
-    nodePort: 32007
+    nodePort: 32009
 
   grafana.ini:
     server:
