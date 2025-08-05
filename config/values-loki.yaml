@@ -1,0 +1,64 @@
+loki:
+  enabled: true
+  service:
+    type: NodePort
+    nodePort: 32009
+
+  yaml:
+    auth_enabled: false
+    server:
+      http_listen_port: 3100
+
+    ingester:
+      lifecycler:
+        ring:
+          kvstore:
+            store: inmemory
+        final_sleep: 0s
+      chunk_idle_period: 5m
+      max_chunk_age: 1h
+      chunk_target_size: 1048576
+
+    schema_config:
+      configs:
+        - from: 2022-01-01
+          store: boltdb-shipper
+          object_store: filesystem
+          schema: v11
+          index:
+            prefix: index_
+            period: 24h
+
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /loki/index
+        cache_location: /loki/cache
+        shared_store: filesystem
+      filesystem:
+        directory: /loki/chunks
+
+    compactor:
+      working_directory: /loki/compactor
+      shared_store: filesystem
+      retention_enabled: true
+
+    limits_config:
+      retention_period: 48h
+
+    chunk_store_config:
+      max_look_back_period: 48h
+
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 48h
+
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 50m
+    limits:
+      memory: 256Mi
+      cpu: 100m
+
+promtail:
+  enabled: true

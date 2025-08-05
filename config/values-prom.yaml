@@ -1,0 +1,119 @@
+prometheus:
+  prometheusSpec:
+    retention: 2d
+    retentionSize: 6GiB
+    scrapeInterval: 60s
+    evaluationInterval: 60s
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+      limits:
+        memory: 256Mi
+        cpu: 300m
+  service:
+    type: NodePort
+    nodePort: 32005
+
+alertmanager:
+  alertmanagerSpec:
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 50m
+      limits:
+        memory: 128Mi
+        cpu: 100m
+  service:
+    type: NodePort
+    nodePort: 32006
+
+grafana:
+  enabled: true
+  adminPassword: "admin"
+  service:
+    type: NodePort
+    nodePort: 32007
+
+  grafana.ini:
+    server:
+      root_url: https://mevin.online/grafana
+      serve_from_sub_path: true
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+    rendering:
+      server_url: http://localhost:8090
+      callback_url: https://mevin.online/grafana
+      serve_from_sub_path: true
+    smtp:
+      enabled: true
+      host: smtp.gmail.com:587
+      user: 175dollarsnow@gmail.com
+      password: $__file{/etc/secrets/smtp_password}
+      from_name: Grafana Alerts
+      from_address: 175dollarsnow@gmail.com
+      starttls_policy: "Always"
+      skip_verify: false
+
+  imageRenderer:
+    enabled: true
+    image:
+      repository: grafana/grafana-image-renderer
+      tag: latest
+      pullPolicy: IfNotPresent
+    service:
+      enabled: true
+      type: ClusterIP 
+      port: 8090
+
+  extraSecretMounts:
+    - name: smtp-secret
+      secretName: grafana-smtp-secret
+      mountPath: /etc/secrets
+      readOnly: true
+
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 50m
+    limits:
+      memory: 256Mi
+      cpu: 150m
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring.svc.cluster.local:3100
+          isDefault: false
+
+kubeStateMetrics:
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 50m
+    limits:
+      memory: 128Mi
+      cpu: 100m
+
+nodeExporter:
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 30m
+    limits:
+      memory: 65Mi
+      cpu: 50m
+
+prometheusOperator:
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 50m
+    limits:
+      memory: 128Mi
+      cpu: 100m
