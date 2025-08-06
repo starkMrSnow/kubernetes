@@ -34,10 +34,6 @@ grafana:
   service:
     type: NodePort
     nodePort: 32007
-  persistence:
-    enabled: true
-    storageClassName: grafana-pv
-
 
   grafana.ini:
     server:
