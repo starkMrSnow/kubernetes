@@ -71,3 +71,7 @@ promtail:
 
 grafana:
   enabled: false
+
+  persistence:
+    enabled: true
+    storageClassName: grafana-pv
