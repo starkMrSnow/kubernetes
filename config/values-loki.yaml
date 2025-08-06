@@ -4,7 +4,7 @@ loki:
     storageClassName: "local-path"
     accessModes:
       - ReadWriteOnce
-    size: 50Gi
+    size: 20Gi
   enabled: true
   service:
     type: NodePort
@@ -49,22 +49,22 @@ loki:
       retention_enabled: true
 
     limits_config:
-      retention_period: 48h
+      retention_period: 24h
 
     chunk_store_config:
-      max_look_back_period: 48h
+      max_look_back_period: 24h
 
     table_manager:
       retention_deletes_enabled: true
-      retention_period: 168h
+      retention_period: 72h
 
   resources:
     requests:
-      memory: 512Mi
-      cpu: 200m
+      memory: 212Mi
+      cpu: 100m
     limits:
-      memory: 16Gi
-      cpu: 500m
+      memory: 8Gi
+      cpu: 200m
 
 promtail:
   enabled: true
