@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/data/grafana
+    path: /mnt/data/loki
   persistentVolumeReclaimPolicy: Retain
 
 ---
